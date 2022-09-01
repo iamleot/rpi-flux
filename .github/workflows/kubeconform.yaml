@@ -1,0 +1,47 @@
+name: Validate Kubernetes configuration files
+
+'on':
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  KUSTOMIZE_FLAGS: "--load-restrictor=LoadRestrictionsNone --reorder=legacy"
+  KUBECONFORM_FLAGS: "-ignore-missing-schemas -strict -schema-location default -schema-location /tmp/flux-crd-schemas -verbose"
+  KUBECONFORM_VERSION: "v0.4.13"
+
+jobs:
+  validate:
+    name: Validate Kubernetes configuration files
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install kubeconform
+        run: |
+          mkdir -p "${HOME}/.local/bin"
+          curl -sL "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" | tar xzf - -C "${HOME}/.local/bin" kubeconform
+      - name: Fetching and extracting Flux CRD schemas
+        run: |
+          mkdir -p /tmp/flux-crd-schemas/master-standalone-strict
+          curl -sL https://github.com/fluxcd/flux2/releases/latest/download/crd-schemas.tar.gz | tar zxf - -C /tmp/flux-crd-schemas/master-standalone-strict
+      - name: Validating Kubernetes configuration files for clusters
+        run: |
+          set -o errexit
+          set -o pipefail
+          find . -type f -name '*.yaml' -maxdepth 1 -print0 | while IFS= read -r -d $'\0' file; do
+            echo "::group::Validating ${file}"
+            kubeconform ${KUBECONFORM_FLAGS} "${file}"
+            echo "::endgroup::"
+          done
+      - name: Validate Kubernetes configuration files
+        run: |
+          set -o errexit
+          set -o pipefail
+          find . -type f -name 'kustomization.yaml' -print0 | while IFS= read -r -d $'\0' file; do
+            directory=$(dirname "${file}")
+            echo "::group::Validating ${directory}"
+            kustomize build ${KUSTOMIZE_FLAGS} "${directory}" | kubeconform ${KUBECONFORM_FLAGS}
+            echo "::endgroup::"
+          done
