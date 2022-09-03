@@ -22,4 +22,28 @@ spec:
   targetNamespace: prometheus
   upgrade:
     crds: CreateReplace
-
+  values:
+    defaultRules:
+      rules:
+        kubeControllerManager: false
+        kubeProxy: false
+        kubeScheduler: false
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      forceDeployDatasources: true
+    kubeControllerManager:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    prometheus:
+      prometheusSpec:
+        retention: 24h
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              resources:
+                requests:
+                  storage: 2Gi
