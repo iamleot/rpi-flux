@@ -25,6 +25,7 @@ spec:
       analytics:
         check_for_plugin_updates: false
         check_for_updates: false
+        enable_feedback_links: false
         reporting_enabled: false
       auth.anonymous:
         enabled: true
