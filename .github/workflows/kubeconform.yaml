@@ -30,7 +30,7 @@ jobs:
         run: |
           set -o errexit
           set -o pipefail
-          find . -type f -name '*.yaml' -maxdepth 1 -print0 | while IFS= read -r -d $'\0' file; do
+          find . -regex './clusters/.*' -type f -name '*.yaml' -maxdepth 3 -print0 | while IFS= read -r -d $'\0' file; do
             echo "::group::Validating ${file}"
             kubeconform ${KUBECONFORM_FLAGS} "${file}"
             echo "::endgroup::"
