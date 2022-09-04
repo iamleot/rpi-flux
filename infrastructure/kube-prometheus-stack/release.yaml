@@ -58,6 +58,7 @@ spec:
                   {{ end }}
     defaultRules:
       rules:
+        etcd: false
         kubeControllerManager: false
         kubeProxy: false
         kubeScheduler: false
@@ -66,6 +67,8 @@ spec:
       forceDeployDashboards: true
       forceDeployDatasources: true
     kubeControllerManager:
+      enabled: false
+    kubeEtcd:
       enabled: false
     kubeProxy:
       enabled: false
