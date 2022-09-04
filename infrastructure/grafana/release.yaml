@@ -24,6 +24,7 @@ spec:
     grafana.ini:
       analytics:
         check_for_updates: false
+        reporting_enabled: false
       auth.anonymous:
         enabled: true
         org_role: Viewer
