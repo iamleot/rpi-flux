@@ -83,3 +83,11 @@ spec:
               resources:
                 requests:
                   storage: 2Gi
+        volumeMounts:
+          - name: consoles
+            mountPath: /etc/prometheus/consoles
+        volumes:
+          - name: consoles
+            configMap:
+              name: consoles
+              defaultMode: 0444
