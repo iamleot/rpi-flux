@@ -15,7 +15,7 @@
 </tr>
 <tr>
   <td>Node Exporter</td>
-  <td><code>node</code></td>
+  <td><code>node-exporter</code></td>
 </tr>
 <tr>
   <td>Prometheus</td>
