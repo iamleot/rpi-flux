@@ -19,7 +19,7 @@
 </tr>
 <tr>
   <td>Prometheus</td>
-  <td><code>prometheus</code></td>
+  <td><code>kube-prometheus-stack-prometheus</code></td>
 </tr>
 </table>
 
