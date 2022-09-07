@@ -26,6 +26,16 @@ spec:
         replication_factor: 1
       storage:
         type: 'filesystem'
+    monitoring:
+      alerts:
+        labels:
+          release: kube-prometheus-stack
+      rules:
+        labels:
+          release: kube-prometheus-stack
+      serviceMonitor:
+        labels:
+          release: kube-prometheus-stack
     singleBinary:
       persistence:
         size: 1Gi
