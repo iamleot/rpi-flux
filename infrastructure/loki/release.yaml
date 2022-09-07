@@ -19,4 +19,9 @@ spec:
   releaseName: loki
   storageNamespace: loki
   targetNamespace: loki
-
+  values:
+    loki:
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: 'filesystem'
