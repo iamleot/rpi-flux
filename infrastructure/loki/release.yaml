@@ -26,3 +26,6 @@ spec:
         replication_factor: 1
       storage:
         type: 'filesystem'
+    singleBinary:
+      persistence:
+        size: 1Gi
