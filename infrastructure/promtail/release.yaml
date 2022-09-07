@@ -19,4 +19,7 @@ spec:
   releaseName: promtail
   storageNamespace: promtail
   targetNamespace: promtail
-
+  values:
+    config:
+      clients:
+        - url: http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
