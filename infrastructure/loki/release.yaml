@@ -26,6 +26,9 @@ spec:
         replication_factor: 1
       storage:
         type: 'filesystem'
+      structuredConfig:
+        ruler:
+          alertmanager_url: http://kube-prometheus-stack-alertmanager.prometheus.svc.cluster.local:9093
     monitoring:
       alerts:
         labels:
