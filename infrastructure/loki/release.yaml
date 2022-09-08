@@ -42,5 +42,13 @@ spec:
         labels:
           release: kube-prometheus-stack
     singleBinary:
+      extraVolumeMounts:
+        - name: rules
+          mountPath: /var/loki/rules/fake
+      extraVolumes:
+        - name: rules
+          configMap:
+            name: rules
+            defaultMode: 0444
       persistence:
         size: 1Gi
