@@ -27,3 +27,8 @@ spec:
       enabled: true
       labels:
         release: kube-prometheus-stack
+      metricRelabelings:
+        - action: drop
+          regex: promtail_(file_bytes_total|read_bytes_total|read_lines_total)
+          sourceLabels:
+            - __name__
