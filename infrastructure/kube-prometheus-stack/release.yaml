@@ -40,9 +40,26 @@ spec:
             - receiver: 'null'
               matchers:
                 - alertname =~ "InfoInhibitor|Watchdog"
+            - receiver: 'slack_one_time'
+              group_by: ['...']
+              matchers:
+                - alertname =~ "Testing"
             - receiver: 'slack'
         receivers:
           - name: 'null'
+          - name: 'slack_one_time'
+            slack_configs:
+              - send_resolved: false
+                channel: '#rpi-alerts'
+                title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}{{ if .CommonLabels.job }} for {{ .CommonLabels.job }}{{end}}'
+                text: |-
+                  {{ range .Alerts }}
+                    *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+                    *Description:* {{ .Annotations.description }}
+                    *Details:*
+                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
           - name: 'slack'
             slack_configs:
               - send_resolved: true

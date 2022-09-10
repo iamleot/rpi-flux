@@ -15,3 +15,12 @@ groups:
         expr: 1
         labels:
           severity: none
+      - alert: Testing
+        annotations:
+          description: |
+            User {{ $labels.user }} needed more than 10 seconds to perform
+            operation.
+          summary: User {{ $labels.user }} gets annoyed.
+        expr: 'count_over_time({app="debug"} |= "Operation" | regexp `needed (?P<time>[0-9]+) seconds for user (?P<user>[0-9]+)` | time >= 10 [1m]) > 0'
+        labels:
+          severity: info
