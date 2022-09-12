@@ -5,6 +5,8 @@ resources:
 configMapGenerator:
   - name: consoles
     namespace: prometheus
+    options:
+      disableNameSuffixHash: true
     files:
       - consoles/index.html.example
       - consoles/node-cpu.html
@@ -13,5 +15,3 @@ configMapGenerator:
       - consoles/node.html
       - consoles/prometheus-overview.html
       - consoles/prometheus.html
-generatorOptions:
-  disableNameSuffixHash: true
