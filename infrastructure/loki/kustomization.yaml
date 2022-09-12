@@ -5,7 +5,7 @@ resources:
 configMapGenerator:
   - name: rules
     namespace: loki
+    options:
+      disableNameSuffixHash: true
     files:
       - rules/general.yaml
-generatorOptions:
-  disableNameSuffixHash: true
