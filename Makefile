@@ -24,17 +24,18 @@ crds:
 
 validate: crds
 	@echo "Validating Flux kustomizations"
-	@set -o errexit; set -o pipefail; \
+	@set -e; \
 	find . -regex './clusters/.*' -type f -name '*.yaml' -maxdepth 3 | \
 		while IFS= read file; do \
 			$(KUBECONFORM) $(KUBECONFORM_FLAGS) $$file; \
 		done
 	@echo "Validating kustomizations"
-	@set -o errexit; set -o pipefail; \
+	@set -e; \
 	find . -type f -name 'kustomization.yaml' | \
 		while IFS= read file; do \
 			dirname=$$(dirname $$file); \
 			echo "Validating $${dirname}"; \
+			$(KUSTOMIZE) build $(KUSTOMIZE_FLAGS) $$dirname > /dev/null; \
 			$(KUSTOMIZE) build $(KUSTOMIZE_FLAGS) $$dirname | \
 			$(KUBECONFORM) $(KUBECONFORM_FLAGS); \
 		done
