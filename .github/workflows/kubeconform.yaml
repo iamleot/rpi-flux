@@ -7,8 +7,6 @@ name: Validate Kubernetes configuration files
   pull_request:
 
 env:
-  KUSTOMIZE_FLAGS: "--load-restrictor=LoadRestrictionsNone --reorder=legacy"
-  KUBECONFORM_FLAGS: "-ignore-missing-schemas -strict -schema-location default -schema-location /tmp/flux-crd-schemas -verbose"
   KUBECONFORM_VERSION: "v0.4.13"
 
 jobs:
