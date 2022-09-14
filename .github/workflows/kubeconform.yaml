@@ -22,26 +22,6 @@ jobs:
         run: |
           mkdir -p "${HOME}/.local/bin"
           curl -sL "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" | tar xzf - -C "${HOME}/.local/bin" kubeconform
-      - name: Fetching and extracting Flux CRD schemas
+      - name: Validating Kubernetes configuration files
         run: |
-          mkdir -p /tmp/flux-crd-schemas/master-standalone-strict
-          curl -sL https://github.com/fluxcd/flux2/releases/latest/download/crd-schemas.tar.gz | tar zxf - -C /tmp/flux-crd-schemas/master-standalone-strict
-      - name: Validating Kubernetes configuration files for clusters
-        run: |
-          set -o errexit
-          set -o pipefail
-          find . -regex './clusters/.*' -type f -name '*.yaml' -maxdepth 3 -print0 | while IFS= read -r -d $'\0' file; do
-            echo "::group::Validating ${file}"
-            kubeconform ${KUBECONFORM_FLAGS} "${file}"
-            echo "::endgroup::"
-          done
-      - name: Validate Kubernetes configuration files
-        run: |
-          set -o errexit
-          set -o pipefail
-          find . -type f -name 'kustomization.yaml' -print0 | while IFS= read -r -d $'\0' file; do
-            directory=$(dirname "${file}")
-            echo "::group::Validating ${directory}"
-            kustomize build ${KUSTOMIZE_FLAGS} "${directory}" | kubeconform ${KUBECONFORM_FLAGS}
-            echo "::endgroup::"
-          done
+          make validate
