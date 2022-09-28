@@ -20,8 +20,6 @@ spec:
   storageNamespace: loki
   targetNamespace: loki
   values:
-    gateway:
-      enabled: false
     loki:
       auth_enabled: false
       commonConfig:
@@ -41,6 +39,9 @@ spec:
       rules:
         labels:
           release: kube-prometheus-stack
+      selfMonitoring:
+        lokiCanary:
+          enabled: false
       serviceMonitor:
         labels:
           release: kube-prometheus-stack
