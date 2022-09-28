@@ -20,6 +20,8 @@ spec:
   storageNamespace: loki
   targetNamespace: loki
   values:
+    gateway:
+      enabled: false
     loki:
       auth_enabled: false
       commonConfig:
