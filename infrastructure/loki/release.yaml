@@ -24,13 +24,14 @@ spec:
       auth_enabled: false
       commonConfig:
         replication_factor: 1
+      rulerConfig:
+        alertmanager_url: http://kube-prometheus-stack-alertmanager.prometheus.svc.cluster.local:9093
+        external_labels:
+          loki: "loki/loki"
+        storage:
+          type: 'local'
       storage:
         type: 'filesystem'
-      structuredConfig:
-        ruler:
-          alertmanager_url: http://kube-prometheus-stack-alertmanager.prometheus.svc.cluster.local:9093
-          external_labels:
-            loki: "loki/loki"
     monitoring:
       alerts:
         labels:
