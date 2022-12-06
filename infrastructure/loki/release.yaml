@@ -28,8 +28,6 @@ spec:
         alertmanager_url: http://kube-prometheus-stack-alertmanager.prometheus.svc.cluster.local:9093
         external_labels:
           loki: "loki/loki"
-        storage:
-          type: 'local'
       storage:
         type: 'filesystem'
     monitoring:
