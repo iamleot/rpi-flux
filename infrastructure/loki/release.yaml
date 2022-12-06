@@ -54,3 +54,7 @@ spec:
             defaultMode: 0444
       persistence:
         size: 1Gi
+    test:
+      # XXX: Needs loki canary, i.e. incompatible with
+      # XXX: `loki.monitoring.selfMonitoring.lokiCanary.enabled: false'
+      enabled: false
