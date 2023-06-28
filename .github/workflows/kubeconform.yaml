@@ -7,7 +7,7 @@ name: Validate Kubernetes configuration files
   pull_request:
 
 env:
-  KUBECONFORM_VERSION: "v0.6.1"
+  KUBECONFORM_VERSION: "v0.6.2"
 
 jobs:
   validate:
