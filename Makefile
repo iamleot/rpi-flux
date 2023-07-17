@@ -14,14 +14,14 @@ all: validate
 
 crds:
 	@echo "Fetching Flux CRD schemas"
-	@mkdir -p $(FLUX_CRD_SCHEMAS_TMPDIR)/master-standalone-strict
+	@mkdir -p $(FLUX_CRD_SCHEMAS_TMPDIR)/v$(KUBERNETES_VERSION)-standalone-strict
 	@$(CURL) --silent --remote-time \
 		--time-cond $(FLUX_CRD_SCHEMAS_TMPFILE) \
 		--output $(FLUX_CRD_SCHEMAS_TMPFILE) \
 		--location $(FLUX_CRD_SCHEMAS_URL)
 	@echo "Extracting Flux CRD schemas"
 	@tar xzf $(FLUX_CRD_SCHEMAS_TMPFILE) \
-		-C $(FLUX_CRD_SCHEMAS_TMPDIR)/master-standalone-strict
+		-C $(FLUX_CRD_SCHEMAS_TMPDIR)/v$(KUBERNETES_VERSION)-standalone-strict
 
 validate: crds
 	@echo "Validating Flux kustomizations"
