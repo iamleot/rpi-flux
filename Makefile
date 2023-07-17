@@ -6,7 +6,7 @@ FLUX_CRD_SCHEMAS_TMPDIR = /tmp/flux-crd-schemas
 FLUX_CRD_SCHEMAS_TMPFILE = $(FLUX_CRD_SCHEMAS_TMPDIR)/flux-crd-schemas.tar.gz
 KUBERNETES_VERSION = 1.25.4
 KUBECONFORM = kubeconform
-KUBECONFORM_FLAGS = -ignore-missing-schemas -strict -kubernetes-version $(KUBERNETES_VERSION) -schema-location default -schema-location $(FLUX_CRD_SCHEMAS_TMPDIR) -verbose
+KUBECONFORM_FLAGS = -strict -kubernetes-version $(KUBERNETES_VERSION) -schema-location default -schema-location $(FLUX_CRD_SCHEMAS_TMPDIR) -skip CustomResourceDefinition -verbose
 KUSTOMIZE = kustomize
 KUSTOMIZE_FLAGS = --load-restrictor=LoadRestrictionsNone --reorder=legacy
 
