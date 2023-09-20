@@ -9,6 +9,7 @@ KUBECONFORM = kubeconform
 KUBECONFORM_FLAGS = -strict -kubernetes-version $(KUBERNETES_VERSION) -schema-location default -schema-location $(FLUX_CRD_SCHEMAS_TMPDIR) -skip CustomResourceDefinition -verbose
 KUSTOMIZE = kustomize
 KUSTOMIZE_FLAGS = --load-restrictor=LoadRestrictionsNone --reorder=legacy
+YAMLLINT = yamllint
 
 all: validate
 
@@ -40,3 +41,7 @@ validate: crds
 			$(KUSTOMIZE) build $(KUSTOMIZE_FLAGS) $$dirname | \
 			$(KUBECONFORM) $(KUBECONFORM_FLAGS); \
 		done
+
+yamllint:
+	@echo "Linting YAML files"
+	@$(YAMLLINT) --config-data relaxed --no-warnings .
