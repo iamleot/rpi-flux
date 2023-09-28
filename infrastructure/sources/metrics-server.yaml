@@ -7,4 +7,3 @@ metadata:
 spec:
   interval: 6h0m0s
   url: https://kubernetes-sigs.github.io/metrics-server/
-
