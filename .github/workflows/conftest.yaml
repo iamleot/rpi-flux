@@ -6,6 +6,9 @@ name: Validate via personal conftest policies
       - main
   pull_request:
 
+env:
+  CONFTEST_VERSION: "0.45.0"
+
 jobs:
   conftest:
     name: Validate via personal conftest policies
@@ -13,9 +16,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Install conftest
+        run: |
+          mkdir -p "${HOME}/.local/bin"
+          curl -sL "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz" | tar xzf - -C "${HOME}/.local/bin" conftest
       - name: Validate via personal conftest policies
-        uses: docker://openpolicyagent/conftest:latest
         env:
           CONFTEST_POLICIES: git::https://github.com/iamleot/conftest-policies.git//policy/github
-        with:
-          args: test --all-namespaces --update "${{ env.CONFTEST_POLICIES }}" .github/workflows
+        run: |
+          conftest test --all-namespaces --update "${{ env.CONFTEST_POLICIES }}" .github/workflows
