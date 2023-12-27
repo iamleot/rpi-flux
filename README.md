@@ -7,3 +7,7 @@ Model B.
 
 Everything here is done just for fun, things will be likely break,
 readers beware!
+
+## See also
+
+- [rpi-ansible](https://github.com/iamleot/rpi-ansible)
