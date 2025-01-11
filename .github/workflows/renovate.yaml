@@ -12,4 +12,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Run Renovate to update outdated dependencies
-        uses: renovatebot/github-action@v41
+        uses: renovatebot/github-action@v41.0.8
