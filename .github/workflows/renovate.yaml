@@ -1,0 +1,14 @@
+name: Check and update output dependencies via Renovate
+
+'on':
+  workflow_dispatch:
+
+jobs:
+  renovate:
+    name: Update dependencies via Renovate
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run Renovate to update outdated dependencies
+        uses: renovatebot/github-action@v41
