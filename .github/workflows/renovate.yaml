@@ -1,6 +1,7 @@
 name: Check and update output dependencies via Renovate
 
 'on':
+  pull_request: # XXX: this should be removed!
   workflow_dispatch:
 
 jobs:
