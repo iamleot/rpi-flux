@@ -1,8 +1,5 @@
 {
-	"username": "renovate-release",
-	"gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-	"platform": "github",
-	"repositories": [
-		"iamleot/rpi-flux"
-	]
+  "extends": [
+    "config:recommended"
+  ]
 }
