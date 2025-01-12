@@ -34,12 +34,11 @@ spec:
       alerts:
         labels:
           release: kube-prometheus-stack
+      lokiCanary:
+        enabled: false
       rules:
         labels:
           release: kube-prometheus-stack
-      selfMonitoring:
-        lokiCanary:
-          enabled: false
       serviceMonitor:
         labels:
           release: kube-prometheus-stack
