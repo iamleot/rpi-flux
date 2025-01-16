@@ -33,5 +33,6 @@
   "kubernetes": {
     "fileMatch": ["\\.ya?ml$"]
   },
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "schedule": ["* 4 * * 3"]
 }
