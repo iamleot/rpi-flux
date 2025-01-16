@@ -30,5 +30,8 @@
   "flux": {
     "fileMatch": ["\\.ya?ml$"]
   },
+  "kubernetes": {
+    "fileMatch": ["\\.ya?ml$"]
+  },
   "labels": ["dependencies"]
 }
