@@ -43,5 +43,12 @@
   "flux": {
     "fileMatch": ["\\.ya?ml$"]
   },
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "description": ["Permit only patch updates for Kubernetes version"],
+      "matchDepNames": ["kubernetes/kubernetes"],
+      "matchUpdateTypes": ["patch"]
+    }
+  ]
 }
