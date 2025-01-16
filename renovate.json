@@ -29,5 +29,6 @@
   ],
   "flux": {
     "fileMatch": ["\\.ya?ml$"]
-  }
+  },
+  "labels": ["dependencies"]
 }
