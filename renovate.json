@@ -25,6 +25,19 @@
       ],
       "depNameTemplate": "yannh/kubeconform",
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "Makefile$"
+      ],
+      "matchStrings": [
+        "KUBERNETES_VERSION\\s*=\\s+(?<currentValue>.*)"
+      ],
+      "autoReplaceStringTemplate": "{{{replace 'v' '' newValue}}}",
+      "currentValueTemplate": "v{{{currentValue}}}",
+      "depNameTemplate": "kubernetes/kubernetes",
+      "datasourceTemplate": "github-releases"
     }
   ],
   "flux": {
