@@ -3,6 +3,30 @@
   "extends": [
     "config:recommended"
   ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.github/workflows/.*\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "CONFTEST_VERSION:\\s+\"(?<currentValue>.*)\""
+      ],
+      "depNameTemplate": "open-policy-agent/conftest",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.github/workflows/.*\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "KUBECONFORM_VERSION:\\s+\"(?<currentValue>.*)\""
+      ],
+      "depNameTemplate": "yannh/kubeconform",
+      "datasourceTemplate": "github-releases"
+    }
+  ],
   "flux": {
     "fileMatch": ["\\.ya?ml$"]
   }
