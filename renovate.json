@@ -28,15 +28,23 @@
     }
   ],
   "flux": {
-    "fileMatch": ["\\.ya?ml$"]
+    "fileMatch": [
+      "\\.ya?ml$"
+    ]
   },
   "kubernetes": {
-    "fileMatch": ["\\.ya?ml$"],
+    "fileMatch": [
+      "\\.ya?ml$"
+    ],
     "ignorePaths": [
       "gotk-components.yaml",
       "gotk-components.yml"
     ]
   },
-  "labels": ["dependencies"],
-  "schedule": ["* 4 * * 3"]
+  "labels": [
+    "dependencies"
+  ],
+  "schedule": [
+    "* 4 * * 3"
+  ]
 }
