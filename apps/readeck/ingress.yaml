@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: readeck
+  namespace: readeck
+  annotations:
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "1"
+    nginx.ingress.kubernetes.io/limit-rpm: "100"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /readeck
+            pathType: Prefix
+            backend:
+              service:
+                name: readeck
+                port:
+                  name: http
+  ingressClassName: nginx
