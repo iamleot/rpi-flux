@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: readeck
+  namespace: readeck
+  labels:
+    app: readeck
+spec:
+  selector:
+    matchLabels:
+      app: readeck
+  serviceName: readeck
+  template:
+    metadata:
+      labels:
+        app: readeck
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: readeck
+          image: codeberg.org/readeck/readeck:0.17.1
+          env:
+            - name: READECK_METRICS_PORT
+              value: "8002"
+            - name: READECK_SERVER_PREFIX
+              value: /readeck
+          ports:
+            - containerPort: 8000
+              name: http
+            - containerPort: 8002
+              name: metrics
+          volumeMounts:
+            - name: readeck
+              mountPath: /readeck
+          livenessProbe:
+            tcpSocket:
+              port: 8000
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+  volumeClaimTemplates:
+    - metadata:
+        name: readeck
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
