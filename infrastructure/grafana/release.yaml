@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-      version: 8.8.3
+      version: 8.10.1
   install:
     createNamespace: true
   interval: 10m0s
