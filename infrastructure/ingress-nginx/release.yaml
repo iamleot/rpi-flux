@@ -62,7 +62,7 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
         namespace: flux-system
-      version: 4.12.0
+      version: 4.12.1
   install:
     createNamespace: true
   interval: 10m0s
