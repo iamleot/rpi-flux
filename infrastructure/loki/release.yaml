@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-      version: 3.10.0
+      version: 6.32.0
   install:
     createNamespace: true
   interval: 10m0s
@@ -20,6 +20,11 @@ spec:
   storageNamespace: loki
   targetNamespace: loki
   values:
+    chunksCache:
+      enabled: false
+    deploymentMode: SingleBinary
+    gateway:
+      enabled: false
     loki:
       auth_enabled: false
       commonConfig:
@@ -28,20 +33,31 @@ spec:
         alertmanager_url: http://kube-prometheus-stack-alertmanager.prometheus.svc.cluster.local:9093
         external_labels:
           loki: "loki/loki"
+      schemaConfig:
+        configs:
+          - from: "2024-04-01"
+            store: tsdb
+            object_store: filesystem
+            schema: v13
+            index:
+              prefix: loki_index_
+              period: 24h
       storage:
         type: 'filesystem'
+    lokiCanary:
+      enabled: false
     monitoring:
       alerts:
         labels:
           release: kube-prometheus-stack
-      lokiCanary:
-        enabled: false
       rules:
         labels:
           release: kube-prometheus-stack
       serviceMonitor:
         labels:
           release: kube-prometheus-stack
+    resultsCache:
+      enabled: false
     singleBinary:
       extraVolumeMounts:
         - name: rules
@@ -53,7 +69,34 @@ spec:
             defaultMode: 0444
       persistence:
         size: 1Gi
+      replicas: 1
     test:
       # XXX: Needs loki canary, i.e. incompatible with
       # XXX: `loki.monitoring.selfMonitoring.lokiCanary.enabled: false'
       enabled: false
+    # Zero out replica counts of all other deployment modes because we are using the
+    # SingleBinary deployment mode.
+    backend:
+      replicas: 0
+    read:
+      replicas: 0
+    write:
+      replicas: 0
+    ingester:
+      replicas: 0
+    querier:
+      replicas: 0
+    queryFrontend:
+      replicas: 0
+    queryScheduler:
+      replicas: 0
+    distributor:
+      replicas: 0
+    compactor:
+      replicas: 0
+    indexGateway:
+      replicas: 0
+    bloomCompactor:
+      replicas: 0
+    bloomGateway:
+      replicas: 0
