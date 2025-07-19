@@ -5,4 +5,5 @@ resources:
   - ingress-nginx.yaml
   - metrics-server.yaml
   - prometheus-community.yaml
+  - vector.yaml
   - victoriametrics.yaml
