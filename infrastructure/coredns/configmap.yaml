@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  empty.override: |
+    # Silence warnings due <https://github.com/coredns/coredns/issues/3600>
+  empty.server: |
+    # Silence warnings due <https://github.com/coredns/coredns/issues/3600>
