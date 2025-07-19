@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: vector
+  namespace: vector
+  labels:
+    release: kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames:
+      - vector
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: vector
+  podMetricsEndpoints:
+    - portNumber: 9090
