@@ -7,10 +7,6 @@ metadata:
 spec:
   values:
     role: Agent
-    podMonitor:
-      enabled: true
-      additionalLabels:
-        release: kube-prometheus-stack
     customConfig:
       data_dir: /vector-data-dir
       api:
