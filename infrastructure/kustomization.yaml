@@ -6,4 +6,5 @@ resources:
   - kube-prometheus-stack
   - metrics-server
   - sources
+  - vector
   - victorialogs
