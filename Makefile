@@ -1,30 +1,16 @@
 .POSIX:
 
 CURL = curl
-FLUX_CRD_SCHEMAS_URL = https://github.com/fluxcd/flux2/releases/latest/download/crd-schemas.tar.gz
-FLUX_CRD_SCHEMAS_TMPDIR = /tmp/flux-crd-schemas
-FLUX_CRD_SCHEMAS_TMPFILE = $(FLUX_CRD_SCHEMAS_TMPDIR)/flux-crd-schemas.tar.gz
 KUBERNETES_VERSION = 1.32.5
 KUBECONFORM = kubeconform
-KUBECONFORM_FLAGS = -strict -kubernetes-version $(KUBERNETES_VERSION) -schema-location default -schema-location $(FLUX_CRD_SCHEMAS_TMPDIR) -skip CustomResourceDefinition -verbose
+KUBECONFORM_FLAGS = -strict -kubernetes-version $(KUBERNETES_VERSION) -schema-location default -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' -skip CustomResourceDefinition -verbose
 KUSTOMIZE = kustomize
 KUSTOMIZE_FLAGS = --load-restrictor=LoadRestrictionsNone --reorder=legacy
 YAMLLINT = yamllint
 
 all: validate
 
-crds:
-	@echo "Fetching Flux CRD schemas"
-	@mkdir -p $(FLUX_CRD_SCHEMAS_TMPDIR)/v$(KUBERNETES_VERSION)-standalone-strict
-	@$(CURL) --silent --remote-time \
-		--time-cond $(FLUX_CRD_SCHEMAS_TMPFILE) \
-		--output $(FLUX_CRD_SCHEMAS_TMPFILE) \
-		--location $(FLUX_CRD_SCHEMAS_URL)
-	@echo "Extracting Flux CRD schemas"
-	@tar xzf $(FLUX_CRD_SCHEMAS_TMPFILE) \
-		-C $(FLUX_CRD_SCHEMAS_TMPDIR)/v$(KUBERNETES_VERSION)-standalone-strict
-
-validate: crds
+validate:
 	@echo "Validating Flux kustomizations"
 	@set -e; \
 	find . -regex './clusters/.*' -type f -name '*.yaml' -maxdepth 3 | \
