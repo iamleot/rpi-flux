@@ -1,0 +1,66 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vector
+  namespace: flux-system
+spec:
+  values:
+    role: Agent
+    podMonitor:
+      enabled: true
+      additionalLabels:
+        release: kube-prometheus-stack
+    customConfig:
+      data_dir: /vector-data-dir
+      api:
+        enabled: true
+        address: 127.0.0.1:8686
+        playground: false
+      sources:
+        internal_metrics:
+          type: internal_metrics
+        k8s:
+          type: kubernetes_logs
+      transforms:
+        parser:
+          inputs:
+            - k8s
+          source: |
+            .log = parse_json(.message) ?? .message
+            del(.message)
+          type: remap
+      sinks:
+        exporter:
+          address: 0.0.0.0:9090
+          inputs:
+            - internal_metrics
+          type: prometheus_exporter
+        vlogs:
+          api_version: v8
+          compression: gzip
+          endpoints:
+            - http://victorialogs-victoria-logs-single-server.victorialogs.svc.cluster.local:9428/insert/elasticsearch/
+          healthcheck:
+            enabled: false
+          inputs:
+            - parser
+          type: elasticsearch
+          query:
+            _msg_field: message
+            _time_field: timestamp
+            _stream_fields: host,container_name
+  chart:
+    spec:
+      chart: vector
+      sourceRef:
+        kind: HelmRepository
+        name: vector
+        namespace: flux-system
+      version: 0.44.0
+  install:
+    createNamespace: true
+  interval: 10m0s
+  releaseName: vector
+  storageNamespace: vector
+  targetNamespace: vector
