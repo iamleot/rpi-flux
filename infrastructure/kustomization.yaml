@@ -4,7 +4,6 @@ resources:
   - grafana
   - ingress-nginx
   - kube-prometheus-stack
-  - loki
   - metrics-server
   - promtail
   - sources
