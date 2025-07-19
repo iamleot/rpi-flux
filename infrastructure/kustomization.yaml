@@ -8,3 +8,4 @@ resources:
   - metrics-server
   - promtail
   - sources
+  - victorialogs
