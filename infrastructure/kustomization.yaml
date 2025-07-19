@@ -5,6 +5,5 @@ resources:
   - ingress-nginx
   - kube-prometheus-stack
   - metrics-server
-  - promtail
   - sources
   - victorialogs
