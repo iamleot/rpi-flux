@@ -38,3 +38,5 @@ spec:
       datasources:
         enabled: true
         searchNamespace: ALL
+    plugins:
+      - victoriametrics-logs-datasource
