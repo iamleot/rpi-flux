@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: weekly-test-alert
+  namespace: prometheus
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: weekly-test-alert
+      rules:
+        - alert: WeeklyTestAlert
+          annotations:
+            description: >
+              Weekly test alert to double-check that alerting works.
+              If you are reading it everything is working and you can
+              ignore it.
+            summary: Weekly test alert to double-check alerting.
+          expr: (day_of_week() == 2 and hour() == 18 and minute() >= 30) > 0
+          for: 5m
+          labels:
+            severity: none
