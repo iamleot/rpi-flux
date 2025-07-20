@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - prometheusrule.yaml
   - release.yaml
 # FIXME: This `configMapGenerator` can ends up in failing if `prometheus`
 # FIXME: namespace does not exists yet and it will need a manual
