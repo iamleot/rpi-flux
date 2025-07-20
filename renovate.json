@@ -6,8 +6,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "\\.github/workflows/.*\\.ya?ml$"
+      "managerFilePatterns": [
+        "/\\.github/workflows/.*\\.ya?ml$/"
       ],
       "matchStrings": [
         "CONFTEST_VERSION:\\s+\"(?<currentValue>.*)\""
@@ -17,8 +17,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "\\.github/workflows/.*\\.ya?ml$"
+      "managerFilePatterns": [
+        "/\\.github/workflows/.*\\.ya?ml$/"
       ],
       "matchStrings": [
         "KUBECONFORM_VERSION:\\s+\"(?<currentValue>.*)\""
@@ -28,13 +28,13 @@
     }
   ],
   "flux": {
-    "fileMatch": [
-      "\\.ya?ml$"
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
     ]
   },
   "kubernetes": {
-    "fileMatch": [
-      "\\.ya?ml$"
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
     ],
     "ignorePaths": [
       "gotk-components.yaml",
