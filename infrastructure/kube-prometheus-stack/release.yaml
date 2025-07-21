@@ -33,6 +33,14 @@ spec:
       name: discord-webhook-url
       valuesKey: discord_webhook_url
       targetPath: alertmanager.config.receivers[1].discord_configs[0].webhook_url
+    - kind: Secret
+      name: telegram-bot
+      valuesKey: bot_token
+      targetPath: alertmanager.config.receivers[3].telegram_configs[0].bot_token
+    - kind: Secret
+      name: telegram-bot
+      valuesKey: chat_id
+      targetPath: alertmanager.config.receivers[3].telegram_configs[0].chat_id
   values:
     alertmanager:
       config:
@@ -49,6 +57,8 @@ spec:
             - receiver: 'discord'
               continue: true
             - receiver: 'slack'
+              continue: true
+            - receiver: 'telegram'
               continue: true
         # XXX: Double-check the order of the receivers defined here and in
         # XXX: spec.valuesFrom!
@@ -79,6 +89,19 @@ spec:
                     *Status:* {{ .Status }}
                     *Details:*
                     {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
+          - name: 'telegram'
+            telegram_configs:
+              - send_resolved: true
+                message: |-
+                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}{{ if .CommonLabels.job }} for {{ .CommonLabels.job }}{{end}}
+                  {{ range .Alerts }}
+                    Alert: {{ .Annotations.summary }} - {{ .Labels.severity }}
+                    Description: {{ .Annotations.description }}
+                    Status: {{ .Status }}
+                    Details:
+                    {{ range .Labels.SortedPairs }} • {{ .Name }}: {{ .Value }}
                     {{ end }}
                   {{ end }}
     defaultRules:
