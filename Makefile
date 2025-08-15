@@ -1,6 +1,5 @@
 .POSIX:
 
-CURL = curl
 KUBERNETES_VERSION = 1.32.5
 KUBECONFORM = kubeconform
 KUBECONFORM_FLAGS = -strict -kubernetes-version $(KUBERNETES_VERSION) -schema-location default -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' -skip CustomResourceDefinition -verbose
