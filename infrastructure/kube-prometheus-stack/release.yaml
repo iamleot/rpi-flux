@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-      version: 77.1.0
+      version: 80.4.2
   install:
     crds: Create
     createNamespace: true
