@@ -22,7 +22,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: readeck
-          image: codeberg.org/readeck/readeck:0.20.1
+          image: codeberg.org/readeck/readeck:0.21.4
           env:
             - name: READECK_METRICS_PORT
               value: "8002"
