@@ -1,6 +1,6 @@
 .POSIX:
 
-KUBERNETES_VERSION = 1.33.4
+KUBERNETES_VERSION = 1.33.6
 KUBECONFORM = kubeconform
 KUBECONFORM_FLAGS = -strict -kubernetes-version $(KUBERNETES_VERSION) -schema-location default -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' -skip CustomResourceDefinition -verbose
 KUSTOMIZE = kustomize
