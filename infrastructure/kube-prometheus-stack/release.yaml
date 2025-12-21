@@ -124,13 +124,13 @@ spec:
       enabled: false
     prometheus:
       prometheusSpec:
-        retention: 24h
+        retention: 7d
         storageSpec:
           volumeClaimTemplate:
             spec:
               resources:
                 requests:
-                  storage: 2Gi
+                  storage: 10Gi
         volumeMounts:
           - name: consoles
             mountPath: /etc/prometheus/consoles
