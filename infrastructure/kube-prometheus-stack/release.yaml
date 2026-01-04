@@ -42,22 +42,6 @@ spec:
       valuesKey: chat_id
       targetPath: alertmanager.config.receivers[3].telegram_configs[0].chat_id
   values:
-    additionalPrometheusRulesMap:
-      custom-kube-prometheus-stack-node-exporter:
-        groups:
-          - name: custom-node-exporter
-            rules:
-              - alert: NodeMemoryHighUtilization
-                annotations:
-                  description: |
-                    Memory is filling up at {{ $labels.instance }}, has been above 95% for the last 15 minutes, is currently at {{ printf "%.2f" $value }}%.
-                  runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodememoryhighutilization
-                  summary: Host is running out of memory.
-                expr: 100 - (node_memory_MemAvailable_bytes{job="node-exporter"} / node_memory_MemTotal_bytes{job="node-exporter"}
-                  * 100) > 95
-                for: 15m
-                labels:
-                  severity: warning
     alertmanager:
       config:
         route:
@@ -121,8 +105,6 @@ spec:
                     {{ end }}
                   {{ end }}
     defaultRules:
-      disabled:
-        NodeMemoryHighUtilization: true
       rules:
         etcd: false
         kubeControllerManager: false
