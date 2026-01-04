@@ -1,4 +1,5 @@
 name: Lint YAML files
+permissions: {}
 
 'on':
   push:

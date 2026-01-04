@@ -1,4 +1,5 @@
 name: Validate Kubernetes configuration files
+permissions: {}
 
 'on':
   push:
