@@ -5,6 +5,7 @@ resources:
   - gateway-api
   - ingress-nginx
   - kgateway-crds
+  - kgateway
   - kube-prometheus-stack
   - metrics-server
   - sources
