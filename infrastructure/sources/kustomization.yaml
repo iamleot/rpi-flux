@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - grafana.yaml
   - ingress-nginx.yaml
+  - kgateway-crds.yaml
   - metrics-server.yaml
   - prometheus-community.yaml
   - vector.yaml
