@@ -4,6 +4,7 @@ resources:
   - coredns
   - gateway-api
   - ingress-nginx
+  - kgateway-crds
   - kube-prometheus-stack
   - metrics-server
   - sources

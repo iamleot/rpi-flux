@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kgateway-crds
+  namespace: flux-system
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: kgateway-crds
+    namespace: flux-system
+  install:
+    createNamespace: true
+  interval: 10m0s
+  releaseName: kgateway-crds
+  storageNamespace: kgateway-system
+  targetNamespace: kgateway-system
