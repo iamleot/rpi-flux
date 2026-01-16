@@ -4,6 +4,7 @@ resources:
   - grafana.yaml
   - ingress-nginx.yaml
   - kgateway-crds.yaml
+  - kgateway.yaml
   - metrics-server.yaml
   - prometheus-community.yaml
   - vector.yaml
