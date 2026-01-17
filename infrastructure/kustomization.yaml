@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - coredns
   - gateway-api
-  - ingress-nginx
   - kube-prometheus-stack
   - nginx-gateway-fabric
   - metrics-server
