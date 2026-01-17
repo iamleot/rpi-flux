@@ -4,6 +4,7 @@ resources:
   - grafana.yaml
   - ingress-nginx.yaml
   - metrics-server.yaml
+  - nginx-gateway-fabric.yaml
   - prometheus-community.yaml
   - vector.yaml
   - victoriametrics.yaml
