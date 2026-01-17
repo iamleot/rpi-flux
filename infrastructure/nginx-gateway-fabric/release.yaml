@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nginx-gateway-fabric
+  namespace: flux-system
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: nginx-gateway-fabric
+    namespace: flux-system
+  install:
+    createNamespace: true
+  interval: 10m0s
+  releaseName: nginx-gateway-fabric
+  storageNamespace: nginx-gateway
+  targetNamespace: nginx-gateway
