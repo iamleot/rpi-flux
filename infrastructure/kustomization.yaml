@@ -5,6 +5,7 @@ resources:
   - gateway-api
   - ingress-nginx
   - kube-prometheus-stack
+  - nginx-gateway-fabric
   - metrics-server
   - sources
   - vector
