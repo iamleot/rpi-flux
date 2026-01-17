@@ -1,0 +1,17 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: readeck
+  namespace: readeck
+spec:
+  parentRefs:
+    - name: http
+      namespace: nginx-gateway
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /readeck
+      backendRefs:
+        - name: readeck
+          port: 80
