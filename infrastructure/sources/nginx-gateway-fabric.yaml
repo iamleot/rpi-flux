@@ -8,4 +8,4 @@ spec:
   interval: 6h0m0s
   url: oci://ghcr.io/nginx/charts/nginx-gateway-fabric
   ref:
-    tag: 2.4.0
+    tag: 2.4.1
