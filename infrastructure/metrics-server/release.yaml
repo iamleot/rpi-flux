@@ -5,6 +5,10 @@ metadata:
   name: metrics-server
   namespace: flux-system
 spec:
+  values:
+    resources:
+      requests:
+        memory: 32Mi
   chart:
     spec:
       chart: metrics-server
