@@ -19,3 +19,8 @@ spec:
   releaseName: grafana-operator
   storageNamespace: grafana
   targetNamespace: grafana
+  values:
+    namespaceScope: true
+    watchNamespaces: "grafana"
+    rbac:
+      useClusterRole: false
