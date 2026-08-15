@@ -116,8 +116,12 @@ spec:
         kubeScheduler: false
     grafana:
       enabled: false
+      namespaceOverride: grafana
       forceDeployDashboards: true
-      forceDeployDatasources: true
+      operator:
+        matchLabels:
+          release: grafana
+        dashboardsConfigMapRefEnabled: true
     kubeControllerManager:
       enabled: false
     kubeEtcd:
