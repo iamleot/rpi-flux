@@ -26,3 +26,7 @@ spec:
       immutable: false
     rbac:
       useClusterRole: false
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: kube-prometheus-stack
