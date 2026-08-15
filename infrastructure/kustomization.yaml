@@ -7,5 +7,4 @@ resources:
   - nginx-gateway-fabric
   - metrics-server
   - sources
-  - vector
   - victorialogs
