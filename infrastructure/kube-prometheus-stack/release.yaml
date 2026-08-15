@@ -43,6 +43,10 @@ spec:
       targetPath: alertmanager.config.receivers[3].telegram_configs[0].chat_id
   values:
     alertmanager:
+      alertmanagerSpec:
+        resources:
+          requests:
+            memory: 32Mi
       config:
         route:
           group_by: ['namespace']
