@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victorialogs-collector
+  namespace: flux-system
+spec:
+  values:
+    remoteWrite:
+      - url: http://victorialogs-victoria-logs-single-server:9428
+        maxDiskUsagePerURL: 1GB
+    podMonitor:
+      enabled: true
+      extraLabels:
+        release: kube-prometheus-stack
+  chart:
+    spec:
+      chart: victoria-logs-collector
+      sourceRef:
+        kind: HelmRepository
+        name: victoriametrics
+        namespace: flux-system
+      version: 0.3.7
+  install:
+    createNamespace: true
+  interval: 10m0s
+  releaseName: victorialogs-collector
+  storageNamespace: victorialogs
+  targetNamespace: victorialogs

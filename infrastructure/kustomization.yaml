@@ -8,3 +8,4 @@ resources:
   - metrics-server
   - sources
   - victorialogs
+  - victorialogs-collector
