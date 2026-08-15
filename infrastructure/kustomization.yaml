@@ -4,6 +4,7 @@ resources:
   - coredns
   - gateway-api
   - grafana
+  - grafana-operator
   - kube-prometheus-stack
   - nginx-gateway-fabric
   - metrics-server
