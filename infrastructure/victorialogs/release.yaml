@@ -10,7 +10,7 @@ spec:
       persistentVolume:
         size: 5Gi
       retentionDiskSpaceUsage: 5GB
-      retentionPeriod: 7d
+      retentionPeriod: 1y
       serviceMonitor:
         enabled: true
         extraLabels:
