@@ -22,5 +22,7 @@ spec:
   values:
     namespaceScope: true
     watchNamespaces: "grafana"
+    crds:
+      immutable: false
     rbac:
       useClusterRole: false
