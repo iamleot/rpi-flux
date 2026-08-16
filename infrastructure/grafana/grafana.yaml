@@ -16,3 +16,5 @@ spec:
       enabled: "true"
       org_role: Viewer
       hide_version: "true"
+    plugins:
+      preinstall_sync: "victoriametrics-logs-datasource"
