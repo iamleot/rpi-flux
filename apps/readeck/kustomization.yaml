@@ -4,4 +4,5 @@ resources:
   - clientsettingspolicy.yaml
   - httproute.yaml
   - service.yaml
+  - servicemonitor.yaml
   - statefulset.yaml

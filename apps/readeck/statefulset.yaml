@@ -24,6 +24,8 @@ spec:
         - name: readeck
           image: codeberg.org/readeck/readeck:0.23.0
           env:
+            - name: READECK_METRICS_HOST
+              value: "0.0.0.0"
             - name: READECK_METRICS_PORT
               value: "8002"
             - name: READECK_SERVER_PREFIX
