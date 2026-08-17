@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: readeck
+    release: kube-prometheus-stack
+  name: readeck
+  namespace: readeck
+spec:
+  endpoints:
+    - port: metrics
+  selector:
+    matchLabels:
+      app: readeck
