@@ -47,6 +47,10 @@ spec:
         resources:
           requests:
             memory: 32Mi
+      networkPolicy:
+        enabled: true
+        egress:
+          enabled: true
       config:
         route:
           group_by: ['namespace']
@@ -125,6 +129,41 @@ spec:
     kubeScheduler:
       enabled: false
     prometheus:
+      networkPolicy:
+        enabled: true
+        egress:
+          - to:
+              - namespaceSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - kube-system
+                podSelector:
+                  matchLabels:
+                    k8s-app: coredns
+              - namespaceSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - victorialogs
+                podSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: victoria-logs-collector
+              - namespaceSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - victorialogs
+                podSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: victoria-logs-single
+            ports:
+              - port: 9153  # coredns
+              - port: 9428  # victoria-logs-single
+              - port: 9429  # victoria-logs-collector
       prometheusSpec:
         retention: 7d
         storageSpec:
@@ -133,3 +172,6 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
+    prometheusOperator:
+      networkPolicy:
+        enabled: true
