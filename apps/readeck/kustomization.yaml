@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - clientsettingspolicy.yaml
   - httproute.yaml
+  - networkpolicy.yaml
   - service.yaml
   - servicemonitor.yaml
   - statefulset.yaml
