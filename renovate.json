@@ -41,6 +41,9 @@
       "gotk-components.yml"
     ]
   },
+  "ignoreDeps": [
+    "fluxcd/flux2"
+  ],
   "labels": [
     "dependencies"
   ],
