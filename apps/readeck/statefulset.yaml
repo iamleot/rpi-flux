@@ -22,7 +22,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: readeck
-          image: codeberg.org/readeck/readeck:0.23.2
+          image: codeberg.org/readeck/readeck:0.23.4
           env:
             - name: READECK_METRICS_HOST
               value: "0.0.0.0"
